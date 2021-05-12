@@ -1,0 +1,42 @@
+<html>
+<head>
+<title>The Great Movie Rank! </title> 
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+<script src="movies.js"></script>
+<link rel="stylesheet" type="text/css" href="movies.css">
+</head>
+<body>
+
+<div ng-app='app' ng-controller='movieCtrl'>
+
+<div class='header'>
+  <h2> The Great Movie Ranking </h2>
+  <p> Submit and Vote on your Favorite Movies </p>
+</div>
+
+<div class='addr'>
+  <h3>Add a Movie to the list here </h3>
+  <p>Type the name of the movie and the year it released, all lowercase with no spaces</p>
+  <p>Give the API a minute, but if nothing shows up you may have your info wrong</p> 
+  <form name='userMovie' ng-submit='addNew(userMovie)'>
+    <input placeholder='Title' ng-model='userMovie.title'/>
+    <input placeholder='Year' ng-model='userMovie.year'/>
+    <button type='submit'> Add Movie </button>
+  </form>  
+</div>
+
+<div class='movieList'ng-repeat="movie in movies | orderBy:'-votes'" >
+	<span>
+        <img ng-src="{{movie.poster}}"/>
+        <h2>{{movie.title}} </h2>
+        <p>{{movie.year}} </p>
+	<p> Votes: {{movie.votes}} </p>
+	</span>
+	<span class='upArrow' ng-click='upVote(movie)'>UpVote</span>
+	<span class='downArrow' ng-click='downVote(movie)'>DownVote</span>
+</div>
+
+</div>
+
+</body>
+</html>
